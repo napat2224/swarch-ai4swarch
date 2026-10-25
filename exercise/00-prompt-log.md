@@ -15,6 +15,6 @@
 | 2 | 1-B | Opus 5.5 | Follow `prompts/1-…` run: B evidence:system/..|prompts/1-recover-architecture.md, system/online-boutique/protos/demo.proto, kubernetes-manifests/README.md, .yaml| ใช่ | 4 | |
 | 3 | 2-a | Opus 5.5 | Follow `prompts/2-…` run: a context:none requirement:...|prompts/2-write-adr.md, docs/adr/template.md| ใช่ | 5 | |
 | 4 | 2-b | Opus 5.5 | Follow `prompts/2-…` run: b context:docs/... requirement:...|prompts/2-write-adr.md, docs/adr/template.md, docs/scenario.md, docs/adr/0001-use-redis-for-cart-storage.md, system/online-boutique/src/checkoutservice/main.go| ใช่ | 5 | |
-| 5 | 3 | Opus 5.5 | `prompts/3-…` | | | | |
+| 5 | 3 | Opus 5.5 | Follow `prompts/3-…` adr: docs/adr/0002.. | prompts/3-review-adr.md, docs/adr/0002-use-rabbitmq-for-post-order-actions.md, docs/scenario.md (read earlier, during Task 2b) | ใช่ | 5 | |
 | 6 | | | | | | | |
 | 7 | | | | | | | |

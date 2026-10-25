@@ -1,4 +1,4 @@
-# ADR-NNNN: Message Broker for Post Order Action
+# ADR-NNNN: RabbitMQ for Post Order Action
 
 - **Status:** Proposed
 - **Date:** 2027-10-25
