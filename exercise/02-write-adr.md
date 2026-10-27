@@ -35,10 +35,10 @@ language: Thai
 
 | เกณฑ์ | Run a | Run b |
 |---|---|---|
-| ใช้ตัวเลขจาก scenario หรือไม่ (latency, ช่วงพีก, ข้อจำกัดของ MailFast) | | |
-| ทางเลือกที่พิจารณา (ระบุ) | | |
-| จัดการแต้มสะสมแบบ "ครั้งเดียวเท่านั้น" และ rate limit ของ MailFast หรือไม่ อย่างไร | | |
-| มีสิ่งที่แต่งขึ้นเองหรือไม่ (ตัวเลข เครื่องมือ หรือข้อเท็จจริงที่ไม่มีใน scenario) | | |
+| ใช้ตัวเลขจาก scenario หรือไม่ (latency, ช่วงพีก, ข้อจำกัดของ MailFast) | ไม่ | ใช้ครบเลย |
+| ทางเลือกที่พิจารณา (ระบุ) |sync calls, pub/sub, orchestrator | sync chain, goroutines, RabbitMQ, Kafka|
+| จัดการแต้มสะสมแบบ "ครั้งเดียวเท่านั้น" และ rate limit ของ MailFast หรือไม่ อย่างไร |แต้ม: บอกแค่ให้กันซ้ำด้วย order_id / event ID, Rate limit: ไม่พูดถึงเลย | แต้ม: ซ้ำด้วย order_id ใน DB ของ loyaltyservice (unique constraint) และ ack หลัง commit Rate limit: email worker ส่งไม่เกิน 50/s ส่วนที่เกินตอนพีก (ประมาณ 150/s) ไปรอใน queue มี retry และ dead-letter queue|
+| มีสิ่งที่แต่งขึ้นเองหรือไม่ (ตัวเลข เครื่องมือ หรือข้อเท็จจริงที่ไม่มีใน scenario) | ไม่มีเลย| มีการสมมติเลข|
 
 ## รับผิดชอบ ADR ฉบับสุดท้ายของตัวเอง
 
@@ -51,6 +51,5 @@ language: Thai
 
 | # | สิ่งที่เปลี่ยนจากร่างของ AI | เหตุผล |
 |---|---|---|
-| 1 | | |
-| 2 | | |
-| 3 | | |
+| 1 | เพิ่ม Option E: Event-driven architecture| เลือกสถาปัตยกรรมให้ชัดเจน|
+| 2 |เลือก E | ต้องแยก post-order actions ออกจาก checkout|
