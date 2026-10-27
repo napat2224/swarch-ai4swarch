@@ -38,15 +38,19 @@ evidence: system/online-boutique/protos/demo.proto, system/online-boutique/kuber
 
 | ผู้เรียก → ผู้ถูกเรียก | หลักฐานที่ AI อ้าง | ยืนยันแล้วหรือไม่ ✅ / ❌ / ❓ | สิ่งที่นิสิตพบ |
 |---|---|---|---|
-| | | | |
-| | | | |
-| | | | |
-| | | | |
-| | | | |
+|Customer → frontend |`k8s/frontend.yaml` (Service `frontend-external`, `type: LoadBalancer`, port `http`)|✅| |
+|frontend → currencyservice |`k8s/frontend.yaml` (`CURRENCY_SERVICE_ADDR`)|✅| |
+|frontend → checkoutservice| `k8s/frontend.yaml` (`CHECKOUT_SERVICE_ADDR`)|✅| |
+|checkoutservice → shippingservice | `k8s/checkoutservice.yaml` (`SHIPPING_SERVICE_ADDR`)|✅| |
+|checkoutservice → currencyservice |`k8s/checkoutservice.yaml` (`CURRENCY_SERVICE_ADDR`)|✅| |
 
 - **สิ่งที่ผิดหรือขาดหายไป** ใน Run B (dependency ที่ไม่มีจริง, dependency ที่ขาดไป, container ที่น่าสงสัย): …
 
 ## สะท้อนคิด (ข้อละ 2–3 ประโยค)
 
 1. เปรียบเทียบ A กับ B: agent **ไม่สามารถ**รู้อะไรได้จากไฟล์ `.proto` เพียงไฟล์เดียว และเพราะเหตุใด
+    demo.proto ไม่ได้บอกว่าใครเป็นผู้เรียกหรือผู้ถูกเลือกเลย A เลยไม่รู้ dependency เลย
+    แต่ B ดูข้อมูลพวกนี้จาก env เลยรู้
 2. ข้อผิดพลาด**ข้อใดข้อหนึ่ง**ที่จะทำให้สมาชิกใหม่ของทีมเข้าใจผิดมากที่สุด หากเผยแพร่แผนภาพนี้โดยไม่ตรวจสอบ
+    dependency มาจาก env ซึ่งไม่ได้มาจาก source code อาจจะทำให้เกิดความเข้าใจผิดได้
+    สมาชิกใหม่อาจจะเข้่าใจว่าเป็น แผนภาพ dependency ที่ครบถ้วนแล้วได้
